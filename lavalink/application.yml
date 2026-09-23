@@ -1,0 +1,95 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+
+lavalink:
+  server:
+    password: "youshallnotpass"
+    sources:
+      youtube: true
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      nico: true
+      http: true
+      local: false
+    filters:
+      volume: true
+      equalizer: true
+      karaoke: true
+      timescale: true
+      tremolo: true
+      vibrato: true
+      distortion: true
+      rotation: true
+      channelMix: true
+      lowPass: true
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    opusEncodingQuality: 10
+    resamplingQuality: LOW
+    trackStuckThresholdMs: 10000
+    useChronicle: false
+    youtubePlaylistLoadLimit: 100
+    playerUpdateInterval: 5
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+    gc-warnings: true
+    # Leave empty = no IP rotation. Fill in if YouTube rate-limits you.
+    # ratelimit:
+    #   ipBlocks: ["1.0.0.0/1"]
+    #   excludeIps: []
+    #   strategy: "RotateOnBan"
+    #   searchTriggersFail: true
+    #   retryLimit: -1
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+sentry:
+  dsn: ""
+  environment: ""
+
+logging:
+  file:
+    path: ./logs/
+  level:
+    root: INFO
+    lavalink: INFO
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    # Preferred clients for playback. "music" is the most reliable for bots.
+    clients:
+      music: true
+      androidVr: false
+      tv: false
+      tvHtml5Embedded: false
+      web: false
+      webEmbedded: false
+      android: false
+      androidMusic: false
+      androidTestSuite: false
+      ios: false
+      mweb: false
+    # OAuth is optional but helps with age-restricted / 429 errors.
+    # Follow: https://github.com/lavalink-devs/youtube-source#oauth
+    # oauth:
+    #   enabled: false
+    #   refreshToken: "YOUR_REFRESH_TOKEN"
+    #   skipInitialization: false
+
+# Load the YouTube plugin. Check for the newest version at:
+# https://github.com/lavalink-devs/youtube-source/releases
+# Lavalink v4 needs youtube-plugin 1.x (1.18.x in 2026).
+lavalinkPlugins:
+  - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
+    repository: "https://maven.lavalink.dev/releases"
+    snapshot: false
